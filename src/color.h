@@ -26,7 +26,7 @@
 #pragma once
 
 enum class Color {
-    Grey,
+    Gray,
     YCbCr,
     RGB,
 };

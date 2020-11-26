@@ -59,7 +59,7 @@ static void BM_OpenImageIO(benchmark::State& state, const char* filename, Color 
         in->read_image(TypeDesc::UINT8, pixels.get());
 
         // convert to RGBA
-        if (color == Color::Grey) {
+        if (color == Color::Gray) {
             auto rgbPixels = std::make_unique<unsigned char[]>(spec.width * spec.height * 4);
 
             auto rawPixels = pixels.get();

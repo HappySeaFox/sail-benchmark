@@ -48,7 +48,7 @@ static void BM_CImg(benchmark::State& state, const char* filename, Color color) 
                 break;
             }
 
-            case Color::Grey: {
+            case Color::Gray: {
                 Image copy(image.width(), image.height(), 1, 4, 0);
                 const unsigned char *src = image.data(0,0,0,0);
                 unsigned char *p1 = copy.data(0,0,0,0), *p2 = copy.data(0,0,0,1), *p3 = copy.data(0,0,0,2), *p4 = copy.data(0,0,0,3);
