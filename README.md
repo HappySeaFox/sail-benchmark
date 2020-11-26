@@ -9,6 +9,8 @@ to RGBA pixels to output the same data.
 
 Target platform: Windows x64 with MSVS 2019.
 
+Any contributions are highly welcomed.
+
 ## Tested libraries
 
 - [Boost.GIL](https://www.boost.org/doc/libs/1_68_0/libs/gil/doc/html/index.html)

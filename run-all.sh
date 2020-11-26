@@ -51,5 +51,9 @@ for image in $images; do
 
     # Sort the result
     cat $results/${image}.txt.tmp | sort -r -n -k 2 > $results/${image}.txt
+
+    echo >> $results/${image}.txt
+    echo "$image" | sed "s|_|-|g" >> $results/${image}.txt
+
     rm -f $results/${image}.txt.tmp
 done
