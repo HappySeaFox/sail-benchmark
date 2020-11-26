@@ -11,8 +11,6 @@ macro(add_benchmark_skeleton)
     target_link_libraries(${BENCH} benchmark::benchmark benchmark::benchmark_main)
 
     set_target_properties(${BENCH} PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${BENCH}")
-
-    target_link_libraries(${BENCH} OpenMP::OpenMP_CXX)
 endmacro()
 
 set(CMAKE_PREFIX_PATH
@@ -23,8 +21,6 @@ set(CMAKE_PREFIX_PATH
 #
 set(PKG_CONFIG_EXECUTABLE "${PROJECT_SOURCE_DIR}/extra/bin/pkg-config.exe")
 find_package(PkgConfig REQUIRED)
-
-find_package(OpenMP REQUIRED)
 
 find_package(benchmark CONFIG REQUIRED)
 
