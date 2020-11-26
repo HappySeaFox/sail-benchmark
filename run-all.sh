@@ -41,19 +41,17 @@ rm -rf $results
 mkdir $results
 
 for image in $images; do
+    result=$(echo "$results/${image}.txt" | sed "s|_|-|g")
+
     for test in $tests; do
         echo "Running $test/$image..."
 
         # Take the mean time
         build/${test}/Release/${test} --benchmark_repetitions=$repetitions --benchmark_filter="$image" 2>/dev/null | \
-            grep _mean | sed "s|BM_||;s|/${image}_mean||" | awk '{print $1 " " $2}' >> $results/${image}.txt.tmp || true # SDL test returns 2 from SDL_Main
+            grep _mean | sed "s|BM_||;s|/${image}_mean||" | awk '{print $1 " " $2}' >> ${result}.tmp || true # SDL test returns 2 from SDL_Main
     done
 
     # Sort the result
-    cat $results/${image}.txt.tmp | sort -r -n -k 2 > $results/${image}.txt
-
-    echo >> $results/${image}.txt
-    echo "$image" | sed "s|_|-|g" >> $results/${image}.txt
-
-    rm -f $results/${image}.txt.tmp
+    cat ${result}.tmp | sort -r -n -k 2 > ${result}
+    rm -f ${result}.tmp
 done
