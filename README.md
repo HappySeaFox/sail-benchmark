@@ -36,7 +36,7 @@ extra/build.sh
 In Git Bash or cmd:
 
 ```
-VCPKG_INSTALL_PATH\vcpkg install libjpeg-turbo libpng benchmark devil freeimage boost-gil openimageio sdl2-image[libjpeg-turbo] stb --triplet x64-windows
+VCPKG_INSTALL_PATH\vcpkg install libjpeg-turbo libpng benchmark cimg devil freeimage boost-gil openimageio sdl2-image[libjpeg-turbo] stb --triplet x64-windows
 
 mkdir build
 cd build
