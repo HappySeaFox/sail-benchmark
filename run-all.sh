@@ -31,6 +31,8 @@ JPEG_YCbCr_15000x10040
 PNG_Gray_15000x10640
 PNG_RGBA_15000x10640"
 
+# Must be greater than 1 to calculate mean time
+#
 repetitions="5"
 
 results=".results"
