@@ -54,13 +54,9 @@ target_link_libraries(sail-benchmark-cimg CImg::CImg)
 
 # DevIL
 #
-pkg_check_modules(IL IMPORTED_TARGET REQUIRED IL)
+pkg_check_modules(IL IMPORTED_TARGET REQUIRED DevIL)
 add_benchmark_skeleton(sail-benchmark-devil)
-
-target_compile_options(sail-benchmark-devil PRIVATE ${IL_CFLAGS})
-target_include_directories(sail-benchmark-devil PRIVATE ${IL_INCLUDE_DIRS})
-# I failed to add DevIL w/o using this ugly hack (see https://github.com/microsoft/vcpkg/issues/14775)
-target_link_libraries(sail-benchmark-devil ${IL_LIBDIR}/DevIL.lib)
+target_link_libraries(sail-benchmark-devil PkgConfig::IL)
 
 # FreeImage
 #
