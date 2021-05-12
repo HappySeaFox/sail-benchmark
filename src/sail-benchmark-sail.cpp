@@ -27,6 +27,7 @@
 
 // SAIL
 #include <sail/sail.h>
+#include <sail-manip/sail-manip.h>
 
 // local
 #include "benchmarks.h"
@@ -40,9 +41,16 @@ static void BM_SAIL(benchmark::State& state, const char* filename) {
 
     for (auto _ : state) {
         sail_image *image;
-
         SAIL_TRY_OR_EXECUTE(sail_read_file(filename, &image),
             fail("Read failed"));
+
+        if (image->pixel_format != SAIL_PIXEL_FORMAT_BPP32_RGBA) {
+            sail_image *image_converted;
+            SAIL_TRY_OR_EXECUTE(sail_convert_image(image, SAIL_PIXEL_FORMAT_BPP32_RGBA, &image_converted),
+                                fail("Conversion failed"));
+
+            sail_destroy_image(image_converted);
+        }
 
         sail_destroy_image(image);
     }

@@ -90,10 +90,11 @@ target_link_libraries(sail-benchmark-openimageio OpenImageIO::OpenImageIO OpenIm
 # SAIL
 #
 find_package(Sail REQUIRED)
+find_package(SailManip REQUIRED)
 
 add_benchmark_skeleton(sail-benchmark-sail)
 
-target_link_libraries(sail-benchmark-sail SAIL::sail)
+target_link_libraries(sail-benchmark-sail SAIL::sail SAIL::sail-manip)
 
 # SDL
 #
