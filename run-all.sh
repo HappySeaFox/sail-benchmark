@@ -54,6 +54,6 @@ for image in $images; do
     done
 
     # Sort the result
-    cat ${result}.tmp | sort -r -n -k 2 > ${result}
+    cat ${result}.tmp | sort -n -k 2 > ${result}
     rm -f ${result}.tmp
 done
