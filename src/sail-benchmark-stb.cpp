@@ -41,7 +41,7 @@ static void BM_STB(benchmark::State& state, const char* filename) {
                                          &width,
                                          &height,
                                          &channelsInFile,
-                                         STBI_rgb_alpha);
+                                         0);
 
         if (image == nullptr) {
             fail("Read failure");

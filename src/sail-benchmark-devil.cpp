@@ -44,12 +44,6 @@ static void BM_DevIL(benchmark::State& state, const char* filename) {
             fail("Read failed");
         }
 
-        ILenum format = ilGetInteger(IL_IMAGE_FORMAT);
-
-        if (format != IL_BGRA && format != IL_RGBA && !ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE)) {
-            fail("Convertion failed");
-        }
-
         ilDeleteImages(1, &image);
     }
 }

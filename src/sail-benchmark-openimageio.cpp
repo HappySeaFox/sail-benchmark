@@ -33,10 +33,9 @@ using namespace OIIO;
 
 // local
 #include "benchmarks.h"
-#include "color.h"
 #include "fail.h"
 
-static void BM_OpenImageIO(benchmark::State& state, const char* filename, Color color) {
+static void BM_OpenImageIO(benchmark::State& state, const char* filename) {
     // Preload codec
     auto outer = ImageInput::open(filename);
 
@@ -58,27 +57,10 @@ static void BM_OpenImageIO(benchmark::State& state, const char* filename, Color 
 
         in->read_image(TypeDesc::UINT8, pixels.get());
 
-        // convert to RGBA
-        if (color == Color::Gray) {
-            auto rgbPixels = std::make_unique<unsigned char[]>(spec.width * spec.height * 4);
-
-            auto rawPixels = pixels.get();
-            auto rawRgbPixels = rgbPixels.get();
-
-            for (int i = 0; i < imageSize; i++) {
-                const int k = i * 4;
-
-                rawRgbPixels[k + 0] = pixels[i];
-                rawRgbPixels[k + 1] = pixels[i];
-                rawRgbPixels[k + 2] = pixels[i];
-                rawRgbPixels[k + 3] = pixels[i];
-            }
-        }
-
         in->close();
     }
 }
 
-SAIL_ADD_BENCHMARK_WITH_COLOR(OpenImageIO)
+SAIL_ADD_BENCHMARK(OpenImageIO)
 
 BENCHMARK_MAIN();

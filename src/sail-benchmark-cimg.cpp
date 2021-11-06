@@ -34,40 +34,15 @@ using namespace cimg_library;
 
 // local
 #include "benchmarks.h"
-#include "color.h"
 #include "fail.h"
 
-static void BM_CImg(benchmark::State& state, const char* filename, Color color) {
+static void BM_CImg(benchmark::State& state, const char* filename) {
     for (auto _ : state) {
         using Image = CImg<unsigned char>;
         Image image(filename);
-
-        switch (color) {
-            case Color::YCbCr: {
-                image.YCbCrtoRGB();
-                break;
-            }
-
-            case Color::Gray: {
-                Image copy(image.width(), image.height(), 1, 4, 0);
-                const unsigned char *src = image.data(0,0,0,0);
-                unsigned char *p1 = copy.data(0,0,0,0), *p2 = copy.data(0,0,0,1), *p3 = copy.data(0,0,0,2), *p4 = copy.data(0,0,0,3);
-
-                const Image::longT imageSize = (Image::longT)image.width() * image.height() * 1;
-
-                cimg_pragma_openmp(parallel for cimg_openmp_if_size(imageSize, 512))
-                for (Image::longT N = 0; N < imageSize; ++N) {
-                    p1[N] = src[N];
-                    p2[N] = src[N];
-                    p3[N] = src[N];
-                    p4[N] = 255;
-                }
-                break;
-            }
-        }
     }
 }
 
-SAIL_ADD_BENCHMARK_WITH_COLOR(CImg)
+SAIL_ADD_BENCHMARK(CImg)
 
 BENCHMARK_MAIN();

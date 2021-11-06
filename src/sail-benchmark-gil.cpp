@@ -30,7 +30,6 @@
 #include <boost/gil/extension/dynamic_image/any_image.hpp>
 #include <boost/gil/extension/io/jpeg.hpp>
 #include <boost/gil/extension/io/png.hpp>
-#include <boost/mpl/vector.hpp>
 
 // local
 #include "benchmarks.h"
@@ -57,12 +56,19 @@ static void BM_GIL(benchmark::State& state, const char* filename) {
 
     for (auto _ : state) {
         try {
-            boost::gil::rgba8_image_t img;
+            boost::gil::any_image<
+                boost::gil::gray8_image_t,
+                boost::gil::gray16_image_t,
+                boost::gil::rgb8_image_t,
+                boost::gil::rgb16_image_t,
+                boost::gil::rgba8_image_t,
+                boost::gil::rgba16_image_t
+            > image;
 
             if (isJpeg) {
-                boost::gil::read_and_convert_image(filename, img, boost::gil::jpeg_tag());
+                boost::gil::read_image(filename, image, boost::gil::jpeg_tag());
             } else if (isPng) {
-                boost::gil::read_and_convert_image(filename, img, boost::gil::png_tag());
+                boost::gil::read_image(filename, image, boost::gil::png_tag());
             }
         } catch (std::exception ex) {
             std::cerr << ex.what() << std::endl;

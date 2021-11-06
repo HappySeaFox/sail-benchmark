@@ -48,18 +48,6 @@ static void BM_SDL(benchmark::State& state, const char* filename) {
             fail("Read failed");
         }
 
-        if (image->format->format != SDL_PIXELFORMAT_RGBA32 && image->format->format != SDL_PIXELFORMAT_BGRA32 &&
-                image->format->format != SDL_PIXELFORMAT_RGBA8888 && image->format->format != SDL_PIXELFORMAT_BGRA8888) {
-            SDL_Surface *convertedImage = SDL_ConvertSurfaceFormat(image, SDL_PIXELFORMAT_RGBA8888, 0);
-
-            if (convertedImage == nullptr) {
-                std::cerr << SDL_GetError() << std::endl;
-                fail("Unable to optimize image");
-            }
-
-            SDL_FreeSurface(convertedImage);
-        }
-
         SDL_FreeSurface(image);
     }
 }

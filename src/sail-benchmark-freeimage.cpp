@@ -42,16 +42,6 @@ static void BM_FreeImage(benchmark::State& state, const char* filename) {
             fail("Read failed");
         }
 
-        if (FreeImage_GetBPP(image) != 32) {
-            FIBITMAP *convertedImage = FreeImage_ConvertTo32Bits(image);
-
-            if (convertedImage == nullptr) {
-                fail("Conversion failed");
-            }
-
-            FreeImage_Unload(convertedImage);
-        }
-
         FreeImage_Unload(image);
     }
 }

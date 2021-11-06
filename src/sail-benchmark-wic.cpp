@@ -83,36 +83,14 @@ static void BM_WIC(benchmark::State& state, const char* filename) {
         pWICFrame->GetSize(&uiWidth, &uiHeight);
         pWICFrame->GetPixelFormat(&pixelFormat);
 
-        if (pixelFormat != GUID_WICPixelFormat32bppRGBA && pixelFormat != GUID_WICPixelFormat32bppBGRA) {
-            IWICBitmapSource *pWICConverter = nullptr;
-            hr = WICConvertBitmapSource(GUID_WICPixelFormat32bppRGBA, pWICFrame, &pWICConverter);
+        IWICBitmap *pWICBitmap = nullptr;
+        hr = pWICFactory->CreateBitmapFromSource(pWICFrame, WICBitmapCacheOnLoad, &pWICBitmap);
 
-            if (FAILED(hr)) {
-                fail("Initialize converter failed");
-            }
-
-            const UINT cbStride = uiWidth * 4;
-            const UINT cbBufferSize = cbStride * uiHeight;
-
-            IWICBitmap *pWICBitmap = nullptr;
-            hr = pWICFactory->CreateBitmapFromSource(pWICConverter, WICBitmapCacheOnLoad, &pWICBitmap);
-
-            if (FAILED(hr)) {
-                fail("Bitmap creation failed");
-            }
-
-            pWICBitmap->Release();
-            pWICConverter->Release();
-        } else {
-            IWICBitmap *pWICBitmap = nullptr;
-            hr = pWICFactory->CreateBitmapFromSource(pWICFrame, WICBitmapCacheOnLoad, &pWICBitmap);
-
-            if (FAILED(hr)) {
-                fail("Bitmap creation failed");
-            }
-
-            pWICBitmap->Release();
+        if (FAILED(hr)) {
+            fail("Bitmap creation failed");
         }
+
+        pWICBitmap->Release();
 
         pWICFrame->Release();
         pWICDecoder->Release();
