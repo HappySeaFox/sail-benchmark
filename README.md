@@ -4,8 +4,7 @@ This is a collection of benchmarks to measure images loading times across differ
 
 Google Benchmark is used as a benchmarking framework.
 
-The benchmarks use JPEG and PNG files as input with four different resolutions, grey and RGB. They also try to convert
-to RGBA pixels to output the same data.
+The benchmarks use JPEG and PNG files as input with four different resolutions, grey and RGB.
 
 Target platform: Windows x64 with MSVS 2019.
 
