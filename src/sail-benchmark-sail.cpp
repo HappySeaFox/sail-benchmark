@@ -41,7 +41,7 @@ static void BM_SAIL(benchmark::State& state, const char* filename) {
 
     for (auto _ : state) {
         sail_image *image;
-        SAIL_TRY_OR_EXECUTE(sail_read_file(filename, &image),
+        SAIL_TRY_OR_EXECUTE(sail_load_from_file(filename, &image),
             fail("Read failed"));
 
         sail_destroy_image(image);
