@@ -1,4 +1,4 @@
-/*  This file is part of SAIL-BENCHMARK (https://github.com/smoked-herring/sail-benchmark)
+/*  This file is part of SAIL-BENCHMARK (https://github.com/HappySeaFox/sail-benchmark)
 
     Copyright (c) 2020 Dmitry Baryshev
 
@@ -28,6 +28,7 @@
 // CImg
 #define cimg_use_jpeg
 #define cimg_use_png
+#define cimg_display 0
 
 #include <CImg.h>
 using namespace cimg_library;

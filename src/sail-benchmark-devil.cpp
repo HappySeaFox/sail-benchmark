@@ -1,4 +1,4 @@
-/*  This file is part of SAIL-BENCHMARK (https://github.com/smoked-herring/sail-benchmark)
+/*  This file is part of SAIL-BENCHMARK (https://github.com/HappySeaFox/sail-benchmark)
 
     Copyright (c) 2020 Dmitry Baryshev
 

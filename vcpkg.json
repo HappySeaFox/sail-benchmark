@@ -1,0 +1,29 @@
+{
+  "dependencies": [
+    "benchmark",
+    "boost-gil",
+    "boost-filesystem",
+    "cimg",
+    "devil",
+    "freeimage",
+    {
+      "name": "gdk-pixbuf",
+      "features": ["jpeg", "png"]
+    },
+    "graphicsmagick",
+    "libjpeg-turbo",
+    {
+      "name": "opencv",
+      "features": ["jpeg", "png"]
+    },
+    "openimageio",
+    "pkgconf",
+    "sail",
+    "sdl2",
+    {
+      "name": "sdl2-image",
+      "features": ["libjpeg-turbo"]
+    },
+    "stb"
+  ]
+}

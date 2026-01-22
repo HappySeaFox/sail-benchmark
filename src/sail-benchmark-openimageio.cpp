@@ -1,4 +1,4 @@
-/*  This file is part of SAIL-BENCHMARK (https://github.com/smoked-herring/sail-benchmark)
+/*  This file is part of SAIL-BENCHMARK (https://github.com/HappySeaFox/sail-benchmark)
 
     Copyright (c) 2020 Dmitry Baryshev
 
@@ -55,7 +55,7 @@ static void BM_OpenImageIO(benchmark::State& state, const char* filename) {
         const auto imageSize = spec.width * spec.height * spec.nchannels;
         auto pixels = std::make_unique<unsigned char[]>(imageSize);
 
-        in->read_image(TypeDesc::UINT8, pixels.get());
+        in->read_image(0, 0, 0, spec.nchannels, TypeDesc::UINT8, pixels.get());
 
         in->close();
     }

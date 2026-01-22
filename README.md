@@ -1,54 +1,64 @@
 # Imaging libraries benchmark
 
-This is a collection of benchmarks to measure images loading times across different C/C++ imaging libraries.
+This is a collection of benchmarks to measure image loading times across different C/C++ imaging libraries.
 
-Google Benchmark is used as a benchmarking framework.
+Google Benchmark is used as the benchmarking framework.
 
 The benchmarks use JPEG and PNG files as input with four different resolutions, grey and RGB.
 
-Target platform: Windows x64 with MSVS 2019.
+Target platform: Windows x64 with MSVC 2019+.
 
 Any contributions are highly welcomed.
 
 ## Tested libraries
 
+The benchmarks test image loading (decoding) performance. Each library loads images using its default settings without pixel format conversions.
+
 - [Boost.GIL](https://www.boost.org/doc/libs/1_68_0/libs/gil/doc/html/index.html)
 - [CImg](https://github.com/dtschump/CImg)
 - [DevIL](http://openil.sourceforge.net)
 - [FreeImage](https://freeimage.sourceforge.io)
+- [gdk-pixbuf](https://gitlab.gnome.org/GNOME/gdk-pixbuf)
+- [GraphicsMagick](http://www.graphicsmagick.org/)
+- [OpenCV](https://opencv.org/)
 - [OpenImageIO](https://github.com/OpenImageIO/oiio.git)
-- [SAIL](https://github.com/smoked-herring/sail)
+- [SAIL](https://github.com/HappySeaFox/sail)
 - [SDL_Image](https://www.libsdl.org/projects/SDL_image)
 - [stb_image](https://github.com/nothings/stb)
 - [WIC (Windows only)](https://docs.microsoft.com/en-us/windows/win32/wic/-wic-about-windows-imaging-codec)
 
 ## Building
 
-Install `vcpkg` following the official instructions. Install MSVS 2019 and CMake.
+Install `vcpkg` following the [official instructions](https://github.com/microsoft/vcpkg). Install CMake.
 
-Build extra dependencies in Git Bash:
+Clone vcpkg to `../vcpkg/` relative to the project directory:
 
+```bash
+cd ..
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+./bootstrap-vcpkg.sh  # Linux/Mac
+# or
+bootstrap-vcpkg.bat   # Windows
 ```
-extra/build.sh
-```
 
-In Git Bash or cmd:
+All dependencies are managed through vcpkg. The project includes a `vcpkg.json` manifest file that will automatically install required packages when configuring with CMake.
 
-```
-VCPKG_INSTALL_PATH\vcpkg install libjpeg-turbo libpng benchmark cimg devil freeimage boost-gil openimageio sdl2-image[libjpeg-turbo] stb --triplet x64-windows
+Build the project:
 
+```bash
 mkdir build
 cd build
-cmake -A x64 -DCMAKE_TOOLCHAIN_FILE=VCPKG_INSTALL_PATH\scripts\buildsystems\vcpkg.cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --config Release
 ```
 
 ## Running
 
-In Git Bash:
+Run all benchmarks:
 
-```
-./run-all.sh
+```bash
+./run-benchmarks.sh
 ```
 
 ## License
@@ -56,7 +66,7 @@ In Git Bash:
 Released under the MIT license.
 
 ```
-Copyright (c) 2020 Dmitry Baryshev
+Copyright (c) 2020-2026 Dmitry Baryshev
 
 The MIT License
 
